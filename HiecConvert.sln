@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeicConvert.Core", "HeicConvert.Core\HeicConvert.Core.csproj", "{6B55E3FE-66F5-4062-9B52-E773BBA5AD06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeicConvert.Cli", "HeicConvert.Cli\HeicConvert.Cli.csproj", "{D5BF837C-8906-4D3E-AFA6-77F400D025DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B55E3FE-66F5-4062-9B52-E773BBA5AD06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B55E3FE-66F5-4062-9B52-E773BBA5AD06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B55E3FE-66F5-4062-9B52-E773BBA5AD06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B55E3FE-66F5-4062-9B52-E773BBA5AD06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5BF837C-8906-4D3E-AFA6-77F400D025DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5BF837C-8906-4D3E-AFA6-77F400D025DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5BF837C-8906-4D3E-AFA6-77F400D025DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5BF837C-8906-4D3E-AFA6-77F400D025DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
