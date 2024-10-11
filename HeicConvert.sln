@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeicConvert.Core", "HeicCon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeicConvert.Cli", "HeicConvert.Cli\HeicConvert.Cli.csproj", "{D5BF837C-8906-4D3E-AFA6-77F400D025DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeicConvert.Ui", "HeicConvert.Ui\HeicConvert.Ui.csproj", "{BE86F1BB-9146-4B77-A71B-B300B4924303}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{D5BF837C-8906-4D3E-AFA6-77F400D025DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5BF837C-8906-4D3E-AFA6-77F400D025DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5BF837C-8906-4D3E-AFA6-77F400D025DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE86F1BB-9146-4B77-A71B-B300B4924303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE86F1BB-9146-4B77-A71B-B300B4924303}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE86F1BB-9146-4B77-A71B-B300B4924303}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE86F1BB-9146-4B77-A71B-B300B4924303}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
