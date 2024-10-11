@@ -12,6 +12,6 @@ using var system = ActorSystem.Create("HiecConvert");
 var reporter = system.ActorOf(ProgressReporterActor.Props(), "reporter");
 var manager = system.ActorOf(ConvertProcessManager.Props(reporter), "manager");
 
-manager.Tell(new StartConverting("/Users/mattburke/projects/HiecConvert/samples"));
+manager.Tell(new StartConverting(Directory.GetCurrentDirectory()));
 
 await manager.WatchAsync();
