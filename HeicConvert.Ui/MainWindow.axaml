@@ -6,31 +6,18 @@
         Width="400" Height="200"
         x:Class="HeicConvert.Ui.MainWindow"
         Title="HEIC -> JPG Converter">
-    <StackPanel VerticalAlignment="Center" Spacing="8">
+    <StackPanel VerticalAlignment="Center" Spacing="8" Margin="8">
 
-        <Grid Margin="8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+        <Button Content="Convert HEIC to JPG" Click="Convert_Click"
+                Margin="0 4 0 4" x:Name="ConvertButton"
+                HorizontalAlignment="Center" />
+        <Button Content="Stop" Click="Stop_Click"
+                Margin="0 4 0 4" x:Name="StopButton"
+                HorizontalAlignment="Center" />
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Source Directory" Margin="0 4" />
-            <TextBox Grid.Row="1" Grid.Column="0" x:Name="SourceText" />
-            <Button Grid.Row="1" Grid.Column="1" Content="Pick" Click="PickFolder_Click" Margin="4 0 0 0 " />
-            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Convert" Click="Convert_Click"
-                    Margin="0 4 0 4" x:Name="ConvertButton" />
-            <ProgressBar Grid.Row="3" Grid.Column="0" Grid.RowSpan="" IsVisible="True" Margin="0 0 4 0"
-                         x:Name="Progress" />
-            <TextBlock Grid.Row="3" Grid.Column="1" Text="? / ?" x:Name="ProgressText" />
-            <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="2 minutes remaining"
-                       TextAlignment="Center" x:Name="TimeRemaining" />
-        </Grid>
+        <ProgressBar IsVisible="False" Margin="0 0 4 0"
+                     x:Name="Progress" />
+        <TextBlock IsVisible="False" Text="? / ?" x:Name="ProgressText" HorizontalAlignment="Center" />
+        <TextBlock IsVisible="False" Text="2 minutes remaining" HorizontalAlignment="Center" />
     </StackPanel>
 </Window>
