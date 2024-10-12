@@ -2,22 +2,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:rxui="http://reactiveui.net"
+        xmlns:app="clr-namespace:HeicConvert.Ui"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
         Width="400" Height="200"
         x:Class="HeicConvert.Ui.MainWindow"
+        x:DataType="app:MainWindowViewModel"
         Title="HEIC -> JPG Converter">
-    <StackPanel VerticalAlignment="Center" Spacing="8" Margin="8">
-
-        <Button Content="Convert HEIC to JPG" Click="Convert_Click"
-                Margin="0 4 0 4" x:Name="ConvertButton"
-                HorizontalAlignment="Center" />
-        <Button Content="Stop" Click="Stop_Click"
-                Margin="0 4 0 4" x:Name="StopButton"
-                HorizontalAlignment="Center" />
-
-        <ProgressBar IsVisible="False" Margin="0 0 4 0"
-                     x:Name="Progress" />
-        <TextBlock IsVisible="False" Text="? / ?" x:Name="ProgressText" HorizontalAlignment="Center" />
-        <TextBlock IsVisible="False" Text="2 minutes remaining" HorizontalAlignment="Center" />
-    </StackPanel>
+    <rxui:RoutedViewHost Grid.Row="0" Router="{Binding Router}">
+        <!-- <rxui:RoutedViewHost.ViewLocator> -->
+        <!--     <app:AppViewLocator /> -->
+        <!-- </rxui:RoutedViewHost.ViewLocator> -->
+    </rxui:RoutedViewHost>
 </Window>

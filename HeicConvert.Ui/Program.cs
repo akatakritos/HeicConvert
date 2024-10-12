@@ -1,7 +1,11 @@
 ﻿using Avalonia;
 using System;
+using System.Reflection;
 using Akka.Actor;
+using Avalonia.ReactiveUI;
 using HeicConvert.Core;
+using ReactiveUI;
+using Splat;
 
 namespace HeicConvert.Ui;
 
@@ -16,6 +20,9 @@ class Program
     public static void Main(string[] args)
     {
         LibHeifSharpDllImportResolver.Register();
+        // Splat uses assembly scanning here to register all views and view models.
+        Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
+
 
         BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
@@ -26,5 +33,6 @@ class Program
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
-            .LogToTrace();
+            .LogToTrace()
+            .UseReactiveUI();
 }
