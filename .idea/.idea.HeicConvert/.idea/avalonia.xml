@@ -4,6 +4,8 @@
     <option name="projectPerEditor">
       <map>
         <entry key="HeicConvert.Ui/App.axaml" value="HeicConvert.Ui/HeicConvert.Ui.csproj" />
+        <entry key="HeicConvert.Ui/ConvertView.axaml" value="HeicConvert.Ui/HeicConvert.Ui.csproj" />
+        <entry key="HeicConvert.Ui/Home.axaml" value="HeicConvert.Ui/HeicConvert.Ui.csproj" />
         <entry key="HeicConvert.Ui/MainWindow.axaml" value="HeicConvert.Ui/HeicConvert.Ui.csproj" />
       </map>
     </option>
