@@ -3,13 +3,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ui="clr-namespace:HeicConvert.Ui"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:DataType="ui:ConvertViewModel"
-             x:Class="HeicConvert.Ui.ConvertView"
-             >
-    <StackPanel>
-    <ProgressBar Value="{Binding ConvertedCount}" Maximum="{Binding TotalCount}" />
-    <TextBlock Text="{Binding ProgressText^}" />
-        
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
+             x:DataType="ui:DesignConvertViewModel"
+             x:Class="HeicConvert.Ui.ConvertView">
+
+    <Design.DataContext>
+        <ui:DesignConvertViewModel />
+    </Design.DataContext>
+    <StackPanel Margin="8" VerticalAlignment="Center">
+        <ProgressBar Value="{Binding ConvertedCount}" Maximum="{Binding TotalCount}" Height="16" />
+        <TextBlock Text="{Binding ProgressText^}" TextAlignment="Center" Margin="0 8 0 8" />
+        <Button Content="Cancel" HorizontalAlignment="Center" IsEnabled="False"/>
     </StackPanel>
 </UserControl>

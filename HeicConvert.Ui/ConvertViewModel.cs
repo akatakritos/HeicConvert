@@ -67,3 +67,12 @@ public class ConvertViewModel: ReactiveObject, IActivatableViewModel, IProgressU
     public string? UrlPathSegment { get; }
     public IScreen HostScreen { get; }
 }
+
+public class DesignConvertViewModel: ConvertViewModel
+{
+    public DesignConvertViewModel(): base(new MainWindowViewModel(null!), "C:\\")
+    {
+        TotalCount = 10;
+        ConvertedCount = 5;
+    }
+}
