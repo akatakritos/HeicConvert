@@ -5,57 +5,63 @@ using Akka.Routing;
 namespace HeicConvert.Core.Actors;
 
 public record StartConverting(string SourceDirectory);
+
 public record Pause();
+
 public record Resume();
+
 public record StopConverting();
 
 public record ImageFound(string Path);
 
-public class ConvertProcessManager: ReceiveActor
+public class ConvertProcessManager : ReceiveActor
 {
     public static Props Props(IActorRef reporter) => Akka.Actor.Props.Create(() => new ConvertProcessManager(reporter));
-    
+
     private readonly IActorRef _progressReporter;
     private readonly IActorRef _router;
     private int _pending = 0;
+
     public ConvertProcessManager(IActorRef progressReporter)
     {
         _progressReporter = progressReporter;
         _router = Context.ActorOf(ConvertRouterActor.Props(), "router");
         Become(Idle);
     }
-    
+
     private void Idle()
     {
         Receive<StartConverting>(OnStartConverting);
     }
 
+    private Task? _scannerTask;
     private CancellationTokenSource? _cts;
+
     private void OnStartConverting(StartConverting obj)
     {
         Become(Converting);
-        
+
         _cts = new CancellationTokenSource();
-        Task.Run(() => RecurseDirectory(obj.SourceDirectory, _cts.Token));
+        
+        var self = Self; // https://getakka.net/articles/debugging/rules/AK1005.html
+        _scannerTask = Task.Run(() => RecurseDirectory(self, obj.SourceDirectory, _cts.Token));
         return;
 
-        void RecurseDirectory(string current, CancellationToken cancellationToken)
+        // Static to avoid capturing actor reference or any actor state
+        static void RecurseDirectory(IActorRef manager, string current, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested) return;
             var heicFiles = Directory.GetFiles(current, "*.heic");
-            
+
             foreach (var heicFile in heicFiles)
             {
-                var jpgFile = Path.ChangeExtension(heicFile, "jpg");
-                _router.Tell(new ConvertImageCmd(heicFile, jpgFile));
-                _pending++;
-                _progressReporter.Tell(new ImageFound(heicFile));
+                manager.Tell(new ImageFound(heicFile));
             }
-            
+
             if (cancellationToken.IsCancellationRequested) return;
             foreach (var directory in Directory.GetDirectories(current))
             {
-                RecurseDirectory(directory, cancellationToken);
+                RecurseDirectory(manager, directory, cancellationToken);
             }
         }
     }
@@ -64,6 +70,16 @@ public class ConvertProcessManager: ReceiveActor
     {
         Receive<StopConverting>(OnStopConverting);
         Receive<ImageConverted>(OnImageConverted);
+        Receive<ImageFound>(OnImageFound);
+    }
+
+    private void OnImageFound(ImageFound obj)
+    {
+        _pending++;
+        
+        var jpgFile = Path.ChangeExtension(obj.Path, "jpg");
+        _router.Tell(new ConvertImageCmd(obj.Path, jpgFile));
+        _progressReporter.Tell(obj);
     }
 
     private void OnStopConverting(StopConverting obj)
@@ -71,13 +87,13 @@ public class ConvertProcessManager: ReceiveActor
         _cts?.Cancel();
         Context.Stop(Self);
     }
-    
+
     private void OnImageConverted(ImageConverted obj)
     {
         _progressReporter.Tell(obj);
         _pending--;
-        
-        if (_pending <= 0)
+
+        if (_scannerTask?.IsCompleted is true && _pending <= 0)
         {
             _cts?.Cancel();
             Context.Stop(Self);
